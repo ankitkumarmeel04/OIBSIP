@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ankit Kumar - Personal Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .navbar ul li a {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #66ffff;
+        }
+
+        .container {
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 80px 30px 30px; /* top padding increased for navbar */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Header styles */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-pic-container {
+            perspective: 1000px;
+            display: inline-block;
+        }
+
+        .profile-pic-3d {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            animation: rotate3d 10s linear infinite;
+            box-shadow: 0 0 15px #00ffff;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .profile-pic-3d:hover {
+            animation-play-state: paused;
+            box-shadow: 0 0 30px #66ffff;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes rotate3d {
+            0% {
+                transform: rotateY(0deg) rotateX(0deg);
+            }
+            50% {
+                transform: rotateY(180deg) rotateX(360deg);
+            }
+            100% {
+                transform: rotateY(360deg) rotateX(0deg);
+            }
+        }
+
+        .name {
+            font-weight: 600;
+            font-size: 2.5rem;
+            margin-top: 15px;
+        }
+
+        .location, .contact, .linkedin {
+            font-weight: 300;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        a {
+            color: #00ffff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* About section */
+        .about {
+            margin-bottom: 30px;
+        }
+
+        .about h2 {
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #00ffff;
+            display: inline-block;
+        }
+
+        .about p {
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Details section */
+        .details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-block {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00ffff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .detail-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px #66ffff;
+        }
+
+        .detail-block h3 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #00ffff;
+            padding-bottom: 5px;
+        }
+
+        .detail-block ul {
+            list-style-type: none;
+        }
+
+        .detail-block ul li {
+            margin-bottom: 8px;
+            font-weight: 300;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#details">Details</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <header class="header">
+            <div class="profile-pic-container">
+                <div class="profile-pic-3d">
+                <!-- Profile image -->
+                <img src="ankit_photo.jpg" alt="Ankit Kumar" class="profile-pic" />
+                </div>
+            </div>
+            <h1 class="name">Ankit Kumar</h1>
+            <p class="location">Jagatpura, Jaipur, Rajasthan</p>
+            <p class="contact">
+                <a href="mailto:akjatmeel@gmail.com">akjatmeel@gmail.com</a> | +91 89056 33850
+            </p>
+            <p class="linkedin">
+                <a href="https://www.linkedin.com/in/ankit-kumar-2974a2241" target="_blank" rel="noopener noreferrer">
+                    LinkedIn Profile
+                </a>
+            </p>
+        </header>
+
+        <section id="about" class="about">
+            <h2>About Me</h2>
+            <p>
+                Motivated and creative Web Designer with hands-on experience in HTML, CSS, Bootstrap, and JavaScript,
+                gained through a part-time role at RDX Technology and practical academic projects. Currently pursuing a
+                B.Tech in Artificial Intelligence, with a strong foundation in UI/UX design, SEO, and digital tools like Adobe
+                Creative Suite and Microsoft Office. Eager to contribute to forward-thinking teams, combining technical
+                skills with a sharp eye for clean, user-friendly design. Fluent in Hindi and proficient in English.
+            </p>
+        </section>
+
+        <section id="details" class="details">
+            <div class="detail-block">
+                <h3>Personal Details</h3>
+                <ul>
+                    <li><strong>Date of Birth:</strong> 2004-06-04</li>
+                    <li><strong>Eligible to work in:</strong> India</li>
+                    <li><strong>Highest Career Level:</strong> Fresher</li>
+                    <li><strong>Industry:</strong> Call Center, IT Operations & Helpdesk, Management, Technology</li>
+                    <li><strong>Total years of experience:</strong> 1</li>
+                </ul>
+            </div>
+
+            <div class="detail-block">
+                <h3>Work Experience</h3>
+                <p><strong>Web Designer</strong> - RDX Technology, Jaipur (Part-time, June 2023 to September 2023)</p>
+                <p>Learned professional web designing (HTML, CSS, Bootstrap, JavaScript).</p>
+            </div>
+
+            <div class="detail-block">
+                <h3>Education</h3>
+                <ul>
+                    <li><strong>B.Tech in Artificial Intelligence</strong> - Vivekananda Global University, Jaipur (Aug 2022 - Present)</li>
+                    <li><strong>12th Pass</strong> - Prince Academy, Sikar (CBSE, English medium, 2022)</li>
+                </ul>
+            </div>
+
+            <div class="detail-block">
+                <h3>Skills / IT Skills</h3>
+                <ul>
+                    <li>MS Excel (1 year)</li>
+                    <li>Web design (1 year)</li>
+                    <li>MS Word (1 year)</li>
+                </ul>
+            </div>
+
+            <div class="detail-block">
+                <h3>Languages</h3>
+                <ul>
+                    <li>English - Intermediate</li>
+                    <li>Hindi - Native</li>
+                </ul>
+            </div>
+
+            <div class="detail-block">
+                <h3>Certifications and Licenses</h3>
+                <ul>
+                    <li>Business Fundamental for Entrepreneurs - NEPTL</li>
+                    <li>Management Information System - NEPTL</li>
+                    <li>Web Designing by RDX Technology Jaipur</li>
+                    <li>Advanced SEO: Developing an SEO-Friendly Website - LinkedIn</li>
+                </ul>
+            </div>
+
+            <div class="detail-block">
+                <h3>Additional Information</h3>
+                <ul>
+                    <li>Deloitte Australia Data Analytics Job Simulation on Forage - June 2025</li>
+                    <li>Created a data dashboard using Tableau</li>
+                    <li>Used Excel to classify data and draw business conclusions</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

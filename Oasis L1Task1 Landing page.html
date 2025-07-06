@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NextGen VPN - Secure & Fast Internet Access</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(90deg, #09203f 0%, #537895 100%);
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 6px rgb(0 0 0 / 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    header .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #a6ffcb;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      padding: 4rem 2rem 6rem 2rem;
+      background: linear-gradient(to right, #1fadec, #159957);
+      border-radius: 0 0 3rem 3rem;
+      position: relative;
+      overflow: visible;
+    }
+
+    .hero-text {
+      max-width: 600px;
+      color: #ffffff;
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(21, 153, 87, 0.4);
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      margin-bottom: 2.2rem;
+      font-weight: 500;
+      color: #e0f7f5;
+    }
+
+    .btn-primary {
+      background-color: #044d46;
+      color: #a6ffcb;
+      padding: 0.85rem 2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: 0 6px 12px rgb(4 77 70 / 0.8);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: #0f9679;
+      box-shadow: 0 10px 30px rgb(21 153 87 / 0.9);
+      transform: translateY(-3px);
+      color: #e0f8f0;
+    }
+
+    /* Hero 3D Animated Cube */
+    .hero-3d {
+      width: 280px;
+      height: 280px;
+      perspective: 1000px;
+    }
+
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateCube 10s infinite linear;
+      border-radius: 1rem;
+      box-shadow: 0 0 30px #0a8a65 inset;
+    }
+
+    .cube div {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      background: linear-gradient(135deg, #0f8a69, #16b987);
+      border: 2px solid #0f8a69;
+      border-radius: 1rem;
+      opacity: 0.85;
+    }
+
+    .face-front {
+      transform: translateZ(140px);
+    }
+
+    .face-back {
+      transform: rotateY(180deg) translateZ(140px);
+    }
+
+    .face-right {
+      transform: rotateY(90deg) translateZ(140px);
+    }
+
+    .face-left {
+      transform: rotateY(-90deg) translateZ(140px);
+    }
+
+    .face-top {
+      transform: rotateX(90deg) translateZ(140px);
+      background: linear-gradient(135deg, #13d89a, #16885e);
+    }
+
+    .face-bottom {
+      transform: rotateX(-90deg) translateZ(140px);
+      background: linear-gradient(135deg, #0f8a69, #145f44);
+    }
+
+    @keyframes rotateCube {
+      from {
+        transform: rotateX(0deg) rotateY(0deg);
+      }
+
+      to {
+        transform: rotateX(360deg) rotateY(360deg);
+      }
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem 2rem;
+    }
+
+    .section {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      padding: 3rem 0;
+      flex-wrap: wrap;
+    }
+
+    .section:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .section img {
+      border-radius: 1.5rem;
+      flex: 1 1 400px;
+      box-shadow: 0 8px 20px rgb(6 59 58 / 0.5);
+      max-width: 450px;
+      width: 100%;
+    }
+
+    .section-text {
+      flex: 1 1 450px;
+      color: #e0f7f5;
+    }
+
+    .section-text h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #b2fff0;
+      margin-bottom: 1rem;
+      text-shadow: 0 1px 1px rgb(10 80 72 / 0.3);
+    }
+
+    .section-text p {
+      font-size: 1.1rem;
+      line-height: 1.55;
+      color: #c9fff9;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    /* Features Grid */
+    .features {
+      background: #0a3c32;
+      border-radius: 1.5rem;
+      padding: 3rem 3rem 4rem 3rem;
+      color: #a1eac6;
+      box-shadow: 0 0 40px #15995788 inset;
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .features h3 {
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      text-shadow: 0 1px 4px #0b5c4f;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .feature-item {
+      background: #144436cc;
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 0 28px #0f8a69;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+
+    .feature-item:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 40px #37f1b0;
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #83f4d0;
+    }
+
+    .feature-item h4 {
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #9cfacb;
+      text-shadow: 0 1px 8px #19b179;
+    }
+
+    .feature-item p {
+      font-weight: 500;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #b1eac3;
+    }
+
+    /* Statistics Section */
+    .stats-section {
+      background: #092b23;
+      border-radius: 2rem;
+      margin-top: 5rem;
+      padding: 3rem 2rem;
+      box-shadow: inset 0 0 80px #0bb779cc;
+      color: #9dfdd2;
+      text-align: center;
+    }
+
+    .stats-section h2 {
+      font-weight: 700;
+      font-size: 2.2rem;
+      margin-bottom: 2.5rem;
+      text-shadow: 0 1px 6px #0ade91bb;
+    }
+
+    .stats-grid {
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      flex: 1 1 150px;
+      font-weight: 700;
+      font-size: 1.9rem;
+      background: #0bb779;
+      border-radius: 1.5rem;
+      padding: 1.75rem 2rem;
+      box-shadow: 0 6px 15px #0afc96cc;
+      transition: background-color 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+
+    .stat-item:hover {
+      background-color: #0fffae;
+      color: #063420;
+      box-shadow: 0 10px 28px #00ebb466;
+    }
+
+    .stat-label {
+      font-weight: 500;
+      font-size: 1rem;
+      margin-top: 0.3rem;
+      display: block;
+      color: #042715dd;
+      text-shadow: none;
+    }
+
+    /* Footer */
+    footer {
+      background: #053523;
+      text-align: center;
+      padding: 1.75rem 1rem;
+      color: #7ae7b8;
+      font-weight: 600;
+      font-size: 0.9rem;
+      user-select: none;
+      box-shadow: 0 -3px 15px #0bb77099 inset;
+      margin-top: 3rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column-reverse;
+        padding-bottom: 3rem;
+        border-radius: 0 0 2.5rem 2.5rem;
+      }
+
+      .hero-text h1 {
+        font-size: 2.8rem;
+      }
+
+      .section {
+        flex-direction: column !important;
+        text-align: center;
+      }
+
+      .section img,
+      .section-text {
+        max-width: 100%;
+      }
+
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        flex-direction: column;
+      }
+
+      .stat-item {
+        width: 60%;
+        margin: 0.5rem auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo" aria-label="Logo for NextGen VPN">NextGen VPN</div>
+  </header>
+
+  <section class="hero" aria-label="Hero section introducing NextGen VPN service">
+    <div class="hero-text">
+      <h1>Next-Gen VPN That Protects Your Digital Life</h1>
+      <p>Ultra-secure, lightning fast internet access for everyone — wherever you are, whenever you need it.</p>
+      <button class="btn-primary" aria-label="Get NextGen VPN Now">Get Started</button>
+    </div>
+
+    <div class="hero-3d" aria-hidden="true">
+      <div class="cube" role="presentation">
+        <div class="face-front"></div>
+        <div class="face-back"></div>
+        <div class="face-right"></div>
+        <div class="face-left"></div>
+        <div class="face-top"></div>
+        <div class="face-bottom"></div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" aria-labelledby="secure-access-title">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3d80106d-d15c-43f2-8078-cb006d37701c.png"
+        alt="Illustration of a lock surrounding a cloud representing cloud security with style of soft pastel hues" />
+      <div class="section-text">
+        <h2 id="secure-access-title">Secure Access, Anywhere on Earth</h2>
+        <p>With servers spanning all continents, connect reliably and protect your privacy, no matter where you
+          roam.</p>
+        <button class="btn-primary" aria-label="Get Secure Access Now">Secure Your Connection</button>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="safer-internet-title">
+      <div class="section-text">
+        <h2 id="safer-internet-title">One Click to a Safer Internet</h2>
+        <p>Stay safe on any network — from cozy cafes to bustling airports. One click shields your online data from
+          prying eyes.</p>
+      </div>
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4258d746-dc1c-464c-87d4-d6c7387332bf.png"
+        alt="Creative digital illustration emphasizing internet safety featuring abstract shapes and a laptop under a protective umbrella" />
+    </section>
+
+    <section class="section" aria-labelledby="device-compatibility-title">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/92e96705-9f49-4b39-b21d-4927459cf459.png"
+        alt="Colorful vector illustration showing multiple device types: smartphone, tablet, laptop, illustrating broad device compatibility" />
+      <div class="section-text">
+        <h2 id="device-compatibility-title">Works Across All Your Devices</h2>
+        <p>Whether phone, tablet, or desktop, NextGen VPN integrates seamlessly with all your gadgets for worry-free
+          protection.</p>
+        <button class="btn-primary" aria-label="Get VPN For Every Device">Download for Your Device</button>
+      </div>
+    </section>
+
+    <section class="features" aria-label="Feature highlights of NextGen VPN">
+      <h3>Why NextGen VPN?</h3>
+      <div class="feature-list">
+        <div class="feature-item" tabindex="0" aria-describedby="feature1-desc">
+          <div class="feature-icon" aria-hidden="true">🔐</div>
+          <h4>Robust Encryption</h4>
+          <p id="feature1-desc">Top-tier encryption protocols to keep your data private and unbreakable.</p>
+        </div>
+        <div class="feature-item" tabindex="0" aria-describedby="feature2-desc">
+          <div class="feature-icon" aria-hidden="true">🌍</div>
+          <h4>Global Coverage</h4>
+          <p id="feature2-desc">Access over 120 server locations in 90+ countries worldwide.</p>
+        </div>
+        <div class="feature-item" tabindex="0" aria-describedby="feature3-desc">
+          <div class="feature-icon" aria-hidden="true">⚡</div>
+          <h4>Blazing Speed</h4>
+          <p id="feature3-desc">Optimized network for minimal latency and maximum speed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section" aria-label="VPN service global network statistics">
+      <h2>Our Global Footprint</h2>
+      <div aria-hidden="true">
+        <img style="max-width: 100%; border-radius: 1rem; filter: drop-shadow(0 0 10px #0fffae99);"
+          src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/68cd4df6-df93-418e-a9a5-8aef4b4c6dd2.png"
+          alt="Stylized world map dotted with VPN server locations represented in glowing green dots on dark background" />
+      </div>
+      <div class="stats-grid" role="list">
+        <div class="stat-item" role="listitem" tabindex="0" aria-label="160 locations worldwide">
+          160
+          <span class="stat-label">Locations</span>
+        </div>
+        <div class="stat-item" role="listitem" tabindex="0" aria-label="90 countries covered by servers">
+          90+
+          <span class="stat-label">Countries</span>
+        </div>
+        <div class="stat-item" role="listitem" tabindex="0" aria-label="Unlimited bandwidth">
+          ∞
+          <span class="stat-label">Unlimited Bandwidth</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 NextGen VPN. All rights reserved.
+  </footer>
+</body>
+
+</html>
+
