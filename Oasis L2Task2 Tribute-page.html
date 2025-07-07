@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tribute to Dr. Manmohan Singh</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto:wght@300;500&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #f0f0f0;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+  }
+
+  .tribute-image {
+    width: 250px;
+    height: 320px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(255,255,255,0.3);
+    margin-bottom: 1.5rem;
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotateY(0deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    50% {
+      transform: translateY(-20px) rotateY(180deg);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+  }
+
+  .content {
+    max-width: 700px;
+    background: rgba(30, 30, 30, 0.85);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .content p {
+    margin-bottom: 1.2rem;
+  }
+
+  /* 3D rotating cube container */
+  .cube-container {
+    perspective: 800px;
+    margin-top: 3rem;
+  }
+
+  .cube {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 10s linear infinite;
+    margin: 0 auto;
+  }
+
+  .cube div {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: #2980b9;
+    border: 3px solid #3498db;
+    border-radius: 15px;
+    box-shadow: inset 0 0 30px rgba(255,255,255,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .front  { transform: translateZ(75px); }
+  .back   { transform: rotateY(180deg) translateZ(75px); }
+  .right  { transform: rotateY(90deg) translateZ(75px); }
+  .left   { transform: rotateY(-90deg) translateZ(75px); }
+  .top    { transform: rotateX(90deg) translateZ(75px); }
+  .bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+  @keyframes rotateCube {
+    from { transform: rotateX(0deg) rotateY(0deg); }
+    to { transform: rotateX(360deg) rotateY(360deg); }
+  }
+
+  footer {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  /* Unique 2D background shapes */
+  .background-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    filter: blur(40px);
+    animation: floatShape 15s ease-in-out infinite;
+    z-index: 0;
+  }
+
+  .shape1 {
+    width: 300px;
+    height: 300px;
+    background: #ff6b6b;
+    top: 10%;
+    left: -100px;
+    animation-delay: 0s;
+  }
+
+  .shape2 {
+    width: 250px;
+    height: 250px;
+    background: #4ecdc4;
+    bottom: 15%;
+    right: -80px;
+    animation-delay: 5s;
+  }
+
+  .shape3 {
+    width: 200px;
+    height: 200px;
+    background: #556270;
+    top: 50%;
+    right: 10%;
+    animation-delay: 10s;
+  }
+
+  @keyframes floatShape {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    50% {
+      transform: translateY(-30px) translateX(20px);
+    }
+  }
+
+  /* Useful 3D animated images - floating spheres */
+  .floating-sphere {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #3498db, #2980b9);
+    box-shadow: 0 0 15px #3498db;
+    animation: floatSphere 6s ease-in-out infinite;
+    opacity: 0.8;
+    z-index: 1;
+  }
+
+  .sphere1 {
+    width: 60px;
+    height: 60px;
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+  }
+
+  .sphere2 {
+    width: 40px;
+    height: 40px;
+    top: 70%;
+    right: 25%;
+    animation-delay: 3s;
+  }
+
+  .sphere3 {
+    width: 50px;
+    height: 50px;
+    top: 40%;
+    left: 70%;
+    animation-delay: 6s;
+  }
+
+  @keyframes floatSphere {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+      box-shadow: 0 0 15px #3498db;
+    }
+    50% {
+      transform: translateY(-20px) translateX(15px) scale(1.1);
+      box-shadow: 0 0 25px #2980b9;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Tribute to Dr. Manmohan Singh</h1>
+  </header>
+
+  <img
+    class="tribute-image"
+    src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Prime_Minister_Dr._Manmohan_Singh_in_March_2014.jpg"
+    alt="Dr. Manmohan Singh"
+    title="Dr. Manmohan Singh"
+  />
+
+  <section class="content">
+    <p>
+      Dr. Manmohan Singh is a renowned Indian economist and politician who served as the Prime Minister of India from 2004 to 2014. He is widely respected for his role in liberalizing the Indian economy and steering the country towards rapid growth and development.
+    </p>
+    <p>
+      Known for his humility, intellect, and dedication, Dr. Singh played a pivotal role in shaping modern India's economic policies. His tenure as Finance Minister in the early 1990s marked a turning point in India's economic reforms.
+    </p>
+    <p>
+      Beyond politics, Dr. Singh is admired for his scholarly contributions and his commitment to public service. His legacy continues to inspire generations of Indians and economists worldwide.
+    </p>
+    <h3>Personal Details</h3>
+    <ul>
+      <li><strong>Date of Birth:</strong> September 26, 1932</li>
+      <li><strong>Place of Birth:</strong> Gah, Punjab, British India (now in Pakistan)</li>
+      <li><strong>Spouse:</strong> Gursharan Kaur</li>
+    </ul>
+    <h3>Awards and Honors</h3>
+    <ul>
+      <li>Padma Vibhushan (1987) - India's second-highest civilian award</li>
+      <li>Order of the Aztec Eagle (2005) - Mexico's highest honor awarded to foreigners</li>
+      <li>Doctor of Laws (Honoris Causa) from various universities</li>
+    </ul>
+  </section>
+
+  <div class="cube-container" aria-label="3D rotating cube animation">
+    <div class="cube" role="img" aria-roledescription="rotating cube with text faces">
+      <div class="front">Economist</div>
+      <div class="back">Prime Minister</div>
+      <div class="right">Scholar</div>
+      <div class="left">Leader</div>
+      <div class="top">Visionary</div>
+      <div class="bottom">Statesman</div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; Tribute Page - Dr. Manmohan Singh
+  </footer>
+
+  <!-- Unique 2D background shapes -->
+  <div class="background-shape shape1"></div>
+  <div class="background-shape shape2"></div>
+  <div class="background-shape shape3"></div>
+
+  <!-- Useful 3D animated floating spheres -->
+  <div class="floating-sphere sphere1"></div>
+  <div class="floating-sphere sphere2"></div>
+  <div class="floating-sphere sphere3"></div>
+</body>
+</html>
