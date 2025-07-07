@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Temperature Converter</title>
+  <style>
+    /* Reset and base styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #f0f0f0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .converter-container {
+      background: #0f1e3d;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.5),
+        inset 0 0 10px #3a7bd5;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      perspective: 1000px;
+      transform-style: preserve-3d;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-size: 2rem;
+      text-shadow: 0 0 10px #3a7bd5;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+    }
+
+    #tempInput {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      box-shadow:
+        0 4px 6px rgba(58, 123, 213, 0.6),
+        inset 0 0 8px #3a7bd5;
+      background: #142a5c;
+      color: #e0e0e0;
+      transition: box-shadow 0.3s ease;
+    }
+
+    #tempInput:focus {
+      box-shadow:
+        0 0 12px #00ffff,
+        inset 0 0 12px #00ffff;
+    }
+
+    .unit-selection {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .unit-selection label {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      user-select: none;
+      color: #a0c4ff;
+      transition: color 0.3s ease;
+    }
+
+    .unit-selection input[type="radio"] {
+      margin-right: 0.5rem;
+      accent-color: #3a7bd5;
+    }
+
+    .unit-selection label:hover {
+      color: #00ffff;
+    }
+
+    #convertBtn {
+      margin-top: 1.5rem;
+      padding: 0.75rem 2rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0f1e3d;
+      background: linear-gradient(145deg, #00ffff, #3a7bd5);
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow:
+        0 6px 15px #00ffff;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    #convertBtn:hover {
+      background: linear-gradient(145deg, #3a7bd5, #00ffff);
+      box-shadow:
+        0 8px 20px #00ffff;
+      transform: translateZ(10px);
+    }
+
+    .result-display {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
+      min-height: 2rem;
+      transform-style: preserve-3d;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    /* 3D floating animation */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotateX(0deg) rotateY(0deg);
+      }
+      50% {
+        transform: translateY(-15px) rotateX(5deg) rotateY(10deg);
+      }
+    }
+
+    /* Glow animation for result */
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ffff;
+      }
+      to {
+        text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .converter-container {
+        padding: 1.5rem;
+        max-width: 95%;
+      }
+
+      #tempInput {
+        font-size: 1rem;
+      }
+
+      #convertBtn {
+        font-size: 1rem;
+        padding: 0.6rem 1.5rem;
+      }
+
+      .unit-selection label {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="converter-container">
+    <h1>Temperature Converter</h1>
+    <div class="input-group">
+      <input type="text" id="tempInput" placeholder="Enter temperature" />
+      <div class="unit-selection">
+        <label><input type="radio" name="unit" value="celsius" checked /> Celsius (°C)</label>
+        <label><input type="radio" name="unit" value="fahrenheit" /> Fahrenheit (°F)</label>
+        <label><input type="radio" name="unit" value="kelvin" /> Kelvin (K)</label>
+      </div>
+    </div>
+    <button id="convertBtn">Convert</button>
+    <div id="result" class="result-display"></div>
+    <div id="thermometerContainer">
+      <div id="thermometer">
+        <div id="thermometerFill"></div>
+      </div>
+      <div id="thermometerLabel"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('convertBtn').addEventListener('click', () => {
+      const tempInput = document.getElementById('tempInput').value.trim();
+      const unitRadios = document.getElementsByName('unit');
+      const resultDiv = document.getElementById('result');
+      const thermometerFill = document.getElementById('thermometerFill');
+      const thermometerLabel = document.getElementById('thermometerLabel');
+
+      // Validate input is a number
+      if (tempInput === '' || isNaN(tempInput)) {
+        resultDiv.textContent = 'Please enter a valid number.';
+        thermometerFill.style.height = '0%';
+        thermometerLabel.textContent = '';
+        return;
+      }
+
+      const inputTemp = parseFloat(tempInput);
+      let inputUnit = 'celsius';
+      for (const radio of unitRadios) {
+        if (radio.checked) {
+          inputUnit = radio.value;
+          break;
+        }
+      }
+
+      let celsius, fahrenheit, kelvin;
+
+      // Convert input to all units
+      switch (inputUnit) {
+        case 'celsius':
+          celsius = inputTemp;
+          fahrenheit = (celsius * 9/5) + 32;
+          kelvin = celsius + 273.15;
+          break;
+        case 'fahrenheit':
+          fahrenheit = inputTemp;
+          celsius = (fahrenheit - 32) * 5/9;
+          kelvin = celsius + 273.15;
+          break;
+        case 'kelvin':
+          kelvin = inputTemp;
+          celsius = kelvin - 273.15;
+          fahrenheit = (celsius * 9/5) + 32;
+          break;
+      }
+
+      // Display converted temperatures except the input unit
+      let displayText = '';
+      if (inputUnit !== 'celsius') {
+        displayText += `Celsius: ${celsius.toFixed(2)} °C\n`;
+      }
+      if (inputUnit !== 'fahrenheit') {
+        displayText += `Fahrenheit: ${fahrenheit.toFixed(2)} °F\n`;
+      }
+      if (inputUnit !== 'kelvin') {
+        displayText += `Kelvin: ${kelvin.toFixed(2)} K\n`;
+      }
+
+      resultDiv.textContent = displayText.trim();
+
+      // Calculate fill level for thermometer based on Celsius temperature
+      // Assuming thermometer scale from -30°C to 50°C
+      const minTemp = -30;
+      const maxTemp = 50;
+      let fillPercent = ((celsius - minTemp) / (maxTemp - minTemp)) * 100;
+      fillPercent = Math.min(Math.max(fillPercent, 0), 100); // Clamp between 0 and 100
+
+      thermometerFill.style.height = fillPercent + '%';
+
+      // Update thermometer label with temperature and unit
+      thermometerLabel.textContent = `${celsius.toFixed(2)} °C`;
+    });
+  </script>
+
+  <style>
+    #thermometerContainer {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #thermometer {
+      width: 40px;
+      height: 150px;
+      background: #142a5c;
+      border-radius: 20px;
+      box-shadow:
+        inset 0 0 10px #3a7bd5,
+        0 4px 10px rgba(0, 255, 255, 0.3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    #thermometerFill {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, #00ffff, #3a7bd5);
+      border-radius: 20px 20px 0 0;
+      transition: height 1s ease-in-out;
+      box-shadow: 0 0 15px #00ffff;
+    }
+
+    #thermometerLabel {
+      margin-top: 0.5rem;
+      font-weight: 700;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
+      font-size: 1.2rem;
+    }
+  </style>
