@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>URBEN ALLOYS - Login & Secure</title>
+<style>
+/* Dark theme base */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    background: #1e1e1e;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #00ffcc;
+    width: 350px;
+    text-align: center;
+    position: relative;
+    perspective: 1000px;
+}
+
+/* 3D animated title */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #00ffcc;
+    /* Removed animation to stop text moving */
+    /* animation: rotate3d 6s linear infinite; */
+    transform-style: preserve-3d;
+}
+
+@keyframes rotate3d {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+        text-shadow: 0 0 10px #00ffcc;
+    }
+    50% {
+        transform: rotateX(360deg) rotateY(360deg);
+        text-shadow: 0 0 20px #00ffcc;
+    }
+    100% {
+        transform: rotateX(0deg) rotateY(0deg);
+        text-shadow: 0 0 10px #00ffcc;
+    }
+}
+
+.form-container {
+    background: #222;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: inset 0 0 10px #00ffcc;
+}
+
+.form-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.form-toggle button {
+    background: transparent;
+    border: none;
+    color: #00ffcc;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 5px 5px 0 0;
+}
+
+.form-toggle button.active,
+.form-toggle button:hover {
+    background: #00ffcc;
+    color: #121212;
+}
+
+.form {
+    display: none;
+    flex-direction: column;
+}
+
+.form.active {
+    display: flex;
+}
+
+.form input {
+    background: #121212;
+    border: 1px solid #00ffcc;
+    border-radius: 5px;
+    color: #eee;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form input:focus {
+    outline: none;
+    border-color: #00ffcc;
+    box-shadow: 0 0 8px #00ffcc;
+}
+
+.form button {
+    background: #00ffcc;
+    border: none;
+    color: #121212;
+    font-weight: bold;
+    padding: 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.form button:hover {
+    background: #00cc99;
+}
+
+/* Secured page container */
+.secured-container {
+    width: 400px;
+    padding: 2rem;
+    box-shadow: 0 0 20px #00ffcc;
+    border-radius: 15px;
+}
+
+/* Logout button */
+#logout-btn {
+    margin-top: 2rem;
+    background: #ff0066;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+#logout-btn:hover {
+    background: #cc0052;
+}
+
+/* Funny motion: bounce effect on buttons */
+button {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Hide secured container initially */
+#secured-page {
+    display: none;
+}
+</style>
+</head>
+<body>
+<div class="container" id="login-register-container">
+    <h1>URBEN ALLOYS</h1>
+    <div class="form-container">
+        <div class="form-toggle">
+            <button id="login-toggle" class="active">Login</button>
+            <button id="register-toggle">Register</button>
+        </div>
+        <form id="login-form" class="form active">
+            <h2>Login</h2>
+            <input type="text" id="login-username" placeholder="Username" required />
+            <input type="password" id="login-password" placeholder="Password" required />
+            <button type="submit">Login</button>
+        </form>
+        <form id="register-form" class="form">
+            <h2>Register</h2>
+            <input type="text" id="register-username" placeholder="Username" required />
+            <input type="password" id="register-password" placeholder="Password" required />
+            <input type="password" id="register-password-confirm" placeholder="Confirm Password" required />
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
+
+<div class="container secured-container" id="secured-page">
+    <h1>Welcome to URBEN ALLOYS Secure Area</h1>
+    <p>You have successfully logged in.</p>
+    <button id="logout-btn">Logout</button>
+</div>
+
+<script>
+// Toggle between login and register forms
+const loginToggle = document.getElementById('login-toggle');
+const registerToggle = document.getElementById('register-toggle');
+const loginForm = document.getElementById('login-form');
+const registerForm = document.getElementById('register-form');
+const loginRegisterContainer = document.getElementById('login-register-container');
+const securedPage = document.getElementById('secured-page');
+
+loginToggle.addEventListener('click', () => {
+    loginToggle.classList.add('active');
+    registerToggle.classList.remove('active');
+    loginForm.classList.add('active');
+    registerForm.classList.remove('active');
+});
+
+registerToggle.addEventListener('click', () => {
+    registerToggle.classList.add('active');
+    loginToggle.classList.remove('active');
+    registerForm.classList.add('active');
+    loginForm.classList.remove('active');
+});
+
+// Registration handler
+registerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('register-username').value.trim();
+    const password = document.getElementById('register-password').value;
+    const passwordConfirm = document.getElementById('register-password-confirm').value;
+
+    if (password !== passwordConfirm) {
+        alert('Passwords do not match!');
+        return;
+    }
+
+    if (localStorage.getItem('user_' + username)) {
+        alert('Username already exists!');
+        return;
+    }
+
+    localStorage.setItem('user_' + username, password);
+    alert('Registration successful! You can now login.');
+    registerForm.reset();
+    registerToggle.click();
+});
+
+// Login handler
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value;
+
+    const storedPassword = localStorage.getItem('user_' + username);
+    if (storedPassword && storedPassword === password) {
+        localStorage.setItem('loggedInUser', username);
+        showSecuredPage();
+    } else {
+        alert('Invalid username or password!');
+    }
+});
+
+// Logout handler
+document.getElementById('logout-btn').addEventListener('click', () => {
+    localStorage.removeItem('loggedInUser');
+    showLoginRegister();
+});
+
+// Show secured page and hide login/register
+function showSecuredPage() {
+    loginRegisterContainer.style.display = 'none';
+    securedPage.style.display = 'block';
+}
+
+// Show login/register and hide secured page
+function showLoginRegister() {
+    loginRegisterContainer.style.display = 'block';
+    securedPage.style.display = 'none';
+}
+
+// On page load, check if user is logged in
+window.onload = () => {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+        showSecuredPage();
+    } else {
+        showLoginRegister();
+    }
+};
+</script>
+</body>
+</html>
